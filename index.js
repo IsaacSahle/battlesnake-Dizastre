@@ -12,6 +12,7 @@ var routes = require('./routes')
 // For deployment to Heroku, the port needs to be set using ENV, so
 // we check for the port number in process.env
 app.set('port', (process.env.PORT || 9001))
+app.set('ip', (process.env.IP || "127.0.0.1"))
 
 app.enable('verbose errors')
 
@@ -64,6 +65,9 @@ app.use(function (err, req, res, next) {
   return
 })
 
-var server = app.listen(app.get('port'), function () {
+console.log(app.get('port'))
+console.log(app.get('ip'))
+
+var server = app.listen(app.get('port'), app.get('ip'), function () {
   console.log('Server listening on port %s', app.get('port'))
 })
